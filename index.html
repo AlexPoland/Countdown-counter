@@ -3,20 +3,105 @@
 <head>
 </head>
 <body>
-<div id="Timer"> 
-<h1>TIMER</h1>
-<table>
-<tr>
-<td><input id="plus" type="button" alt="plus" value="+"></td> <td><input id="plus" type="button" alt="plus" value="+"></td> <td><input id="plus" type="button" alt="plus" value="+"></td>
-</tr>
-<tr>
-<td id="Vhours">0</td> <td id="Vminutes">0</td> <td id="Vseconds">0</td>
-</tr>
-<tr>
-<td><input id="minus" type="button" alt="minus" value="-"></td> <td><input id="minus" type="button" alt="minus" value="-"></td> <td><input id="minus" type="button" alt="minus" value="-"></td>
-</tr>
-</table>
-</div>
+	<div id="Timer"> 
+		<h1>TIMER</h1>
+		<table>
+			<tr>
+				<td><input id="plus" onclick="increase_hour()" type="button" alt="plus" value="+"></td> <td><input id="plus" onclick="increase_minute()" type="button" alt="plus" value="+"></td> <td><input id="plus" onclick="increase_second()" type="button" alt="plus" value="+"></td>
+			</tr>
+			<tr>
+				<td id="Vhours">0</td> <td id="Vminutes">0</td> <td id="Vseconds">0</td>
+			</tr>
+			<tr>
+				<td><input id="minus" onclick="decrease_hour()" type="button" alt="minus" value="-"></td> <td><input id="minus" onclick="decrease_minute()"  type="button" alt="minus" value="-"></td> <td><input id="minus" onclick="decrease_second()" type="button" alt="minus" value="-"></td>
+			</tr>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		hours = 0;
+		minutes = 0;
+		seconds = 0;
+		state=0;
+		
+		function increase_hour()
+		{
+			if(state==0)
+			{
+				hours+=1;
+			}
+			hours%=60;
+			document.getElementById("Vhours").innerHTML = hours;
+		
+		}
+		
+		function increase_minute()
+		{
+			if(state==0)
+			{
+				minutes+=1;
+			}
+			minutes%=60;
+			document.getElementById("Vminutes").innerHTML = minutes;
+		
+		}
+		
+		function increase_second()
+		{
+			if(state==0)
+			{
+				seconds+=1;
+			}
+			seconds%=60;
+			document.getElementById("Vseconds").innerHTML = seconds;
+		
+		}
+		
+		function decrease_hour()
+		{
+			if(state==0)
+			{
+				hours-=1;
+			}
+			
+			if(hours<0)
+			{
+				hours=0;
+			}
+			document.getElementById("Vhours").innerHTML = hours;
+		
+		}
+		
+		function decrease_minute()
+		{
+			if(state==0)
+			{
+				minutes-=1;
+			}
+			if(minutes<0)
+			{
+				minutes=0;
+			}
+			
+			document.getElementById("Vminutes").innerHTML = minutes;
+		
+		}
+		
+		function decrease_second()
+		{
+			if(state==0)
+			{
+				seconds-=1;
+			}
+			if(seconds<0)
+			{
+				seconds=0;
+			}
+			document.getElementById("Vseconds").innerHTML = seconds;
+		
+		}
+		
+	</script>
 
 </body>
 </html>
