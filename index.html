@@ -16,13 +16,18 @@
 				<td><input id="minus" onclick="decrease_hour()" type="button" alt="minus" value="-"></td> <td><input id="minus" onclick="decrease_minute()"  type="button" alt="minus" value="-"></td> <td><input id="minus" onclick="decrease_second()" type="button" alt="minus" value="-"></td>
 			</tr>
 		</table>
+		<input id="START" onclick="start()" type="button" value="START">
+		<input id="RESET" onclick="reset()" type="button" value="RESET">
+		
 	</div>
+	
 
 	<script type="text/javascript">
 		hours = 0;
 		minutes = 0;
 		seconds = 0;
 		state=0;
+		myvar=0;
 		
 		function increase_hour()
 		{
@@ -97,6 +102,55 @@
 			{
 				seconds=0;
 			}
+			document.getElementById("Vseconds").innerHTML = seconds;
+		
+		}
+		
+		function start()
+		{
+			state=1;
+			total=(hours*3600)+(minutes*60)+seconds;
+			myvar=setInterval(myTimer,1000);
+			function myTimer()
+			{
+				total-=1;
+				hours=Math.round(total/3600-0.5);
+				total%=3600;
+				minutes=Math.round(total/60-0.5);
+				total%=60;
+				seconds=total;
+				if(total<0)
+				{
+					clearInterval(myvar);
+					stan=0;
+					alert("Koniec czasu!!!");
+					hours = 0;
+					minutes = 0;
+					seconds = 0;
+					
+					
+				}
+				total=(hours*3600)+(minutes*60)+seconds;
+				document.getElementById("Vhours").innerHTML = hours;
+				document.getElementById("Vminutes").innerHTML = minutes;
+				document.getElementById("Vseconds").innerHTML = seconds;
+			
+			}
+		
+		}
+		
+		function reset()
+		{
+			if(state==1)
+			{
+				clearInterval(myvar);
+			}
+			state=0;
+			hours = 0;
+			minutes = 0;
+			seconds = 0;
+			document.getElementById("Vhours").innerHTML = hours;
+			document.getElementById("Vminutes").innerHTML = minutes;
 			document.getElementById("Vseconds").innerHTML = seconds;
 		
 		}
